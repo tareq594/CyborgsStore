@@ -46,13 +46,13 @@ module.exports = {
 
 	// smpt server parameters
 	smtpServer: {
-		host: process.env.SMTP_HOST || '',
-		port: process.env.SMTP_PORT || 587,
-		secure: process.env.SMTP_SECURE || false,
-		user: process.env.SMTP_USER || '',
-		pass: process.env.SMTP_PASS || '',
-		fromName: process.env.SMTP_FROM_NAME || '',
-		fromAddress: process.env.SMTP_FROM_ADDRESS || ''
+		host: process.env.SMTP_HOST || 'smtp.zoho.com',
+		port: process.env.SMTP_PORT || 465,
+		secure: process.env.SMTP_SECURE || true,
+		user: process.env.SMTP_USER || 'tareq5@cyborgstech.com',
+		pass: process.env.SMTP_PASS || '@Tareq1994',
+		fromName: process.env.SMTP_FROM_NAME || 'Cyborgs',
+		fromAddress: process.env.SMTP_FROM_ADDRESS || 'amman'
 	},
 
 	// key to sign tokens
