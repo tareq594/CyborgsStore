@@ -12,16 +12,19 @@ const dbUrl =
 
 module.exports = {
 	// used by Store (server side)
-	apiBaseUrl: process.env.API_BASE_URL || `http://localhost:3001/api/v1`,
+	apiBaseUrl:
+		process.env.API_BASE_URL || `https://api.demo.store.cyborgstech.com/api/v1`,
 
 	// Access-Control-Allow-Origin
-	storeBaseUrl: process.env.STORE_BASE_URL || `http://localhost:3000`,
+	storeBaseUrl:
+		process.env.STORE_BASE_URL || `https://demo.store.cyborgstech.com`,
 
 	// used by API
-	adminBaseURL: process.env.ADMIN_BASE_URL || 'http://localhost:3002',
+	adminBaseURL:
+		process.env.ADMIN_BASE_URL || 'https://admin.demo.store.cyborgstech.com',
 	adminLoginPath: process.env.ADMIN_LOGIN_PATH || '/login',
 
-	apiListenPort: process.env.API_PORT || 3001,
+	apiListenPort: process.env.API_PORT || 443,
 
 	// used by API
 	mongodbServerUrl: dbUrl,
