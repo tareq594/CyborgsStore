@@ -3,6 +3,7 @@ import helmet from 'helmet';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import responseTime from 'response-time';
+const cors = require('cors');
 import winston from 'winston';
 import logger from './lib/logger';
 import settings from './lib/settings';
@@ -17,6 +18,7 @@ const STATIC_OPTIONS = {
 };
 
 app.set('trust proxy', 1);
+app.use(cors());
 app.use(helmet());
 
 app.get('/images/:entity/:id/:size/:filename', (req, res, next) => {
