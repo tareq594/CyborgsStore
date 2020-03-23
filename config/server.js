@@ -39,7 +39,6 @@ module.exports = {
 		productsUploadPath: 'images/products',
 		themeImageUploadPath: 'assets/images',
 		filesUploadPath: 'assets',
-
 		// S3 Config
 		bucket: 'cezerin2-asset-test'
 	},
@@ -48,7 +47,7 @@ module.exports = {
 	smtpServer: {
 		host: process.env.SMTP_HOST || 'smtp.zoho.com',
 		port: process.env.SMTP_PORT || 465,
-		secure: process.env.SMTP_SECURE || true,
+		secure: process.env.SMTP_SECURE || false,
 		user: process.env.SMTP_USER || 'tareq5@cyborgstech.com',
 		pass: process.env.SMTP_PASS || '@Tareq1994',
 		fromName: process.env.SMTP_FROM_NAME || 'Cyborgs',
