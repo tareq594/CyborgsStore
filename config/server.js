@@ -24,7 +24,7 @@ module.exports = {
 		process.env.ADMIN_BASE_URL || 'https://admin.demo.store.cyborgstech.com',
 	adminLoginPath: process.env.ADMIN_LOGIN_PATH || '/login',
 
-	apiListenPort: process.env.API_PORT || 443,
+	apiListenPort: process.env.API_PORT || 3001,
 
 	// used by API
 	mongodbServerUrl: dbUrl,
