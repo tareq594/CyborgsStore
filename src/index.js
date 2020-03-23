@@ -19,7 +19,7 @@ const STATIC_OPTIONS = {
 
 app.set('trust proxy', 1);
 app.use(helmet());
-app.use(cors());
+// app.use(cors());
 
 app.get('/images/:entity/:id/:size/:filename', (req, res, next) => {
 	// A stub of image resizing (can be done with Nginx)
