@@ -46,7 +46,7 @@ module.exports = {
 	// smpt server parameters
 	smtpServer: {
 		host: process.env.SMTP_HOST || 'smtp.zoho.com',
-		port: process.env.SMTP_PORT || 465,
+		port: process.env.SMTP_PORT || 587,
 		secure: process.env.SMTP_SECURE || true,
 		user: process.env.SMTP_USER || 'tareq5@cyborgstech.com',
 		pass: process.env.SMTP_PASS || '@Tareq1994',
