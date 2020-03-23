@@ -32,7 +32,8 @@ module.exports = {
 	// assest
 	assetServer: {
 		type: process.env.ASSETS_TYPE || 'local', // 'local' | 's3'
-		domain: process.env.ASSETS_BASE_URL || 'http://localhost:3001', // add localBasePath to S3 domain
+		domain:
+			process.env.ASSETS_BASE_URL || 'https://admin.demo.store.cyborgstech.com', // add localBasePath to S3 domain
 		localBasePath: 'public/content',
 		categoriesUploadPath: 'images/categories',
 		productsUploadPath: 'images/products',
@@ -55,10 +56,10 @@ module.exports = {
 	},
 
 	// key to sign tokens
-	jwtSecretKey: process.env.JWT_SECRET_KEY || '-',
+	jwtSecretKey: process.env.JWT_SECRET_KEY || '@MeenZaidTareq',
 
 	// key to sign store cookies
-	cookieSecretKey: process.env.COOKIE_SECRET_KEY || '-',
+	cookieSecretKey: process.env.COOKIE_SECRET_KEY || '@MeenZaidTareq',
 
 	// store UI language
 	language: process.env.LANGUAGE || 'en',
