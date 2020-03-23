@@ -33,7 +33,7 @@ module.exports = {
 	assetServer: {
 		type: process.env.ASSETS_TYPE || 'local', // 'local' | 's3'
 		domain:
-			process.env.ASSETS_BASE_URL || 'https://admin.demo.store.cyborgstech.com', // add localBasePath to S3 domain
+			process.env.ASSETS_BASE_URL || 'https://api.demo.store.cyborgstech.com', // add localBasePath to S3 domain
 		localBasePath: 'public/content',
 		categoriesUploadPath: 'images/categories',
 		productsUploadPath: 'images/products',
