@@ -18,8 +18,8 @@ const STATIC_OPTIONS = {
 };
 
 app.set('trust proxy', 1);
-app.use(cors());
 app.use(helmet());
+app.use(cors());
 
 app.get('/images/:entity/:id/:size/:filename', (req, res, next) => {
 	// A stub of image resizing (can be done with Nginx)
@@ -33,13 +33,14 @@ security.applyMiddleware(app);
 
 app.all('*', (req, res, next) => {
 	// CORS headers
-	const allowedOrigins = security.getAccessControlAllowOrigin();
-	const { origin } = req.headers;
-	if (allowedOrigins === '*') {
-		res.setHeader('Access-Control-Allow-Origin', allowedOrigins);
-	} else if (allowedOrigins.indexOf(origin) > -1) {
-		res.setHeader('Access-Control-Allow-Origin', origin);
-	}
+
+	// const allowedOrigins = security.getAccessControlAllowOrigin();
+	// const { origin } = req.headers;
+	// if (allowedOrigins === '*') {
+	// 	res.setHeader('Access-Control-Allow-Origin', allowedOrigins);
+	// } else if (allowedOrigins.indexOf(origin) > -1) {
+	// 	res.setHeader('Access-Control-Allow-Origin', origin);
+	// }
 
 	res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
 	res.header('Access-Control-Allow-Credentials', 'true');
