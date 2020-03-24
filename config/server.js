@@ -68,7 +68,7 @@ module.exports = {
 
 	// cost factor, controls how much time is needed to calculate a single BCrypt hash
 	// for production: recommended salRounds > 12
-	saltRounds: process.env.SALT_ROUNDS || 12,
+	saltRounds: process.env.SALT_ROUNDS || 15,
 
-	developerMode: process.env.DEVELOPER_MODE || false
+	developerMode: process.env.DEVELOPER_MODE || true
 };
