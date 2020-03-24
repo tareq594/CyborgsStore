@@ -47,7 +47,7 @@ module.exports = {
 	smtpServer: {
 		host: process.env.SMTP_HOST || 'smtp.gmail.com',
 		port: process.env.SMTP_PORT || 587,
-		secure: process.env.SMTP_SECURE || true,
+		secure: process.env.SMTP_SECURE || false,
 		user: process.env.SMTP_USER || 'tareq.sanabra@gmail.com',
 		pass: process.env.SMTP_PASS || '@MeenhoonTareq',
 		fromName: process.env.SMTP_FROM_NAME || 'Cyborgs',
