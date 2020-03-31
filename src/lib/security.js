@@ -93,7 +93,11 @@ const applyMiddleware = app => {
 };
 
 const getAccessControlAllowOrigin = () =>
-	[settings.storeBaseUrl, settings.adminBaseURL] || '*';
+	[
+		settings.storeBaseUrl,
+		settings.adminBaseURL,
+		'https://admin.demo.store.cyborgstech.com/settings'
+	] || '*';
 
 export default {
 	checkUserScope,
