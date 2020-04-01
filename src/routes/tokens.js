@@ -41,8 +41,9 @@ class SecurityTokensRoute {
 		this.router.post('/v1/authorize', this.sendDashboardSigninUrl.bind(this));
 		this.router.post(
 			'/v1/authorizeWithEmailAndPassword',
-			this.sendDashboardSigninUrl.bind(this)
+			this.authorizeWithEmailAndPassword.bind(this)
 		);
+		this.router.post('/v1/registeradmin', this.registeradmin.bind(this));
 	}
 
 	async getTokens(req, res, next) {
@@ -106,6 +107,25 @@ class SecurityTokensRoute {
 		try {
 			const data = await SecurityTokensService.sendDashboardSigninUrl(req);
 			return res.send(data);
+		} catch (err) {
+			return next(err);
+		}
+	}
+
+	async authorizeWithEmailAndPassword(req, res, next) {
+		try {
+			const data = await SecurityTokensService.authorizeWithEmailAndPassword(
+				req
+			);
+			return res.send(data);
+		} catch (err) {
+			return next(err);
+		}
+	}
+
+	async registeradmin(req, res, next) {
+		try {
+			await SecurityTokensService.registeradmin(req, res, next);
 		} catch (err) {
 			return next(err);
 		}

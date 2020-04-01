@@ -10,6 +10,11 @@ import parse from '../../lib/parse';
 import settings from '../../lib/settings';
 import mailer from '../../lib/mailer';
 import SettingsService from '../settings/settings';
+const bcrypt = require('bcryptjs');
+
+const validateRegisterInput = require('../validation/register');
+const validateLoginInput = require('../validation/login');
+const { saltRounds } = settings;
 
 const cache = lruCache({
 	max: 10000,
@@ -288,9 +293,7 @@ class SecurityTokensService {
 			const device = userAgent.device.vendor
 				? `${userAgent.device.vendor} ${userAgent.device.model}, `
 				: '';
-			const requestFrom = `${device}${userAgent.os.name}, ${
-				userAgent.browser.name
-			}<br />
+			const requestFrom = `${device}${userAgent.os.name}, ${userAgent.browser.name}<br />
       ${date}<br />
       IP: ${ip}<br />
       ${country}`;
@@ -311,6 +314,50 @@ class SecurityTokensService {
 			return { sent: emailSent, error: null };
 		}
 		return { sent: false, error: 'Access Denied' };
+	}
+
+	async authorizeWithEmailAndPassword(req) {
+		const { email, password } = req.body;
+	}
+
+	async registeradmin(req) {
+		const { email, password, password_confirm } = req.body;
+		const { errors, isValid } = validateRegisterInput(req.body);
+		if (!isValid) {
+			return res.status(400).json(errors);
+		}
+		db.collection('adminusers')
+			.findOne({ email: email.toLowerCase() })
+			.then(user => {
+				if (user) {
+					return res.status(400).json({
+						email: 'Email already exists'
+					});
+				} else {
+					const newUser = {
+						name: req.body.name,
+						email: req.body.email.toLowerCase(),
+						password: req.body.password
+					};
+
+					bcrypt.genSalt(saltRounds, (err, salt) => {
+						if (err) console.error('There was an error', err);
+						else {
+							bcrypt.hash(newUser.password, salt, (err, hash) => {
+								if (err) console.error('There was an error', err);
+								else {
+									newUser.password = hash;
+									db.collection('adminusers')
+										.insertOne(newUser)
+										.then(user => {
+											res.json(user);
+										});
+								}
+							});
+						}
+					});
+				}
+			});
 	}
 }
 
