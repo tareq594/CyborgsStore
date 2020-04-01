@@ -320,7 +320,7 @@ class SecurityTokensService {
 		const { email, password } = req.body;
 	}
 
-	async registeradmin(req) {
+	async registeradmin(req, res, next) {
 		const { email, password, password_confirm } = req.body;
 		const { errors, isValid } = validateRegisterInput(req.body);
 		if (!isValid) {
