@@ -10,7 +10,7 @@ import parse from '../../lib/parse';
 import settings from '../../lib/settings';
 import mailer from '../../lib/mailer';
 import SettingsService from '../settings/settings';
-const bcrypt = require('bcryptjs');
+const bcrypt = require('bcrypt');
 
 const validateRegisterInput = require('../validation/register');
 const validateLoginInput = require('../validation/login');
