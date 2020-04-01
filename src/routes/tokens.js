@@ -39,6 +39,10 @@ class SecurityTokensRoute {
 			this.deleteToken.bind(this)
 		);
 		this.router.post('/v1/authorize', this.sendDashboardSigninUrl.bind(this));
+		this.router.post(
+			'/v1/authorizeWithEmailAndPassword',
+			this.sendDashboardSigninUrl.bind(this)
+		);
 	}
 
 	async getTokens(req, res, next) {
