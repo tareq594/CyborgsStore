@@ -320,8 +320,10 @@ class SecurityTokensService {
 		var { email, password } = req.body;
 		const { errors, isValid } = validateLoginInput(req.body);
 		if (!isValid) {
+			const emailError = errors.email || '';
+			const passwordError = errors.password || '';
 			return res.json({
-				error: (errors.email | '') + ' ' + (errors.password | ''),
+				error: emailError + ' ' + passwordError,
 				isAuthorized: false
 			});
 		}
