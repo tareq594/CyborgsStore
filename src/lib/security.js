@@ -74,22 +74,18 @@ const verifyToken = token =>
 
 const checkTokenInBlacklistCallback = async (req, payload, done) => {
 	try {
-		console.log('check here');
-		console.log(payload);
 		const { jti } = payload;
 		const blacklist = await SecurityTokensService.getTokensBlacklist();
 		const tokenIsRevoked = blacklist.includes(jti);
-		console.log(tokenIsRevoked);
 		return done(null, tokenIsRevoked);
 	} catch (e) {
-		console.log('check here error');
-		console.log(e);
 		done(e, SET_TOKEN_AS_REVOKEN_ON_EXCEPTION);
 	}
 };
 
 const applyMiddleware = app => {
 	if (DEVELOPER_MODE === false) {
+		return;
 		app.use(
 			expressJwt({
 				secret: settings.jwtSecretKey,
