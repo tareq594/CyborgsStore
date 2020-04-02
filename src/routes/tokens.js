@@ -114,10 +114,7 @@ class SecurityTokensRoute {
 
 	async authorizeWithEmailAndPassword(req, res, next) {
 		try {
-			const data = await SecurityTokensService.authorizeWithEmailAndPassword(
-				req
-			);
-			return res.send(data);
+			await SecurityTokensService.authorizeWithEmailAndPassword(req, res, next);
 		} catch (err) {
 			return next(err);
 		}

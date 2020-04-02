@@ -316,8 +316,50 @@ class SecurityTokensService {
 		return { sent: false, error: 'Access Denied' };
 	}
 
-	async authorizeWithEmailAndPassword(req) {
-		const { email, password } = req.body;
+	async authorizeWithEmailAndPassword(req, res, next) {
+		var { email, password } = req.body;
+		const { errors, isValid } = validateLoginInput(req.body);
+		if (!isValid) {
+			return res.status(400).json(errors);
+		}
+		email = email.toLowerCase();
+
+		db.collection('adminusers')
+			.findOne({ email: email })
+			.then(user => {
+				if (!user) {
+					errors.email = 'User not found';
+					return res.status(404).json(errors);
+				}
+				bcrypt.compare(password, user.password).then(isMatch => {
+					if (isMatch) {
+						const payload = {
+							id: user.id,
+							name: user.name
+						};
+						jwt.sign(
+							payload,
+							settings.jwtSecretKey,
+							{
+								expiresIn: 864000
+							},
+							(err, token) => {
+								if (err) console.error('There is some error in token', err);
+								else {
+									res.json({
+										success: true,
+										isAuthorized: true,
+										token: `${token}`
+									});
+								}
+							}
+						);
+					} else {
+						errors.password = 'Incorrect Password';
+						return res.status(400).json(errors);
+					}
+				});
+			});
 	}
 
 	async registeradmin(req, res, next) {
