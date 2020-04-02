@@ -56,6 +56,7 @@ const checkUserScope = (requiredScope, req, res, next) => {
 	) {
 		next();
 	} else {
+		console.log('4033333');
 		res.status(403).send({ error: true, message: 'Forbidden' });
 	}
 };
