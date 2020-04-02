@@ -320,7 +320,10 @@ class SecurityTokensService {
 		var { email, password } = req.body;
 		const { errors, isValid } = validateLoginInput(req.body);
 		if (!isValid) {
-			return res.json({ error: errors.email + ' ' + errors.password });
+			return res.json({
+				error: errors.email + ' ' + errors.password,
+				isAuthorized: false
+			});
 		}
 		email = email.toLowerCase();
 
@@ -329,7 +332,7 @@ class SecurityTokensService {
 			.then(user => {
 				if (!user) {
 					errors.email = 'User not found';
-					return res.json({ error: errors.email });
+					return res.json({ error: errors.email, isAuthorized: false });
 				}
 				bcrypt.compare(password, user.password).then(isMatch => {
 					if (isMatch) {
@@ -356,7 +359,7 @@ class SecurityTokensService {
 						);
 					} else {
 						errors.password = 'Incorrect Password';
-						return res.json({ error: errors.password });
+						return res.json({ error: errors.password, isAuthorized: false });
 					}
 				});
 			});
