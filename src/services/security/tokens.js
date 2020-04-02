@@ -340,7 +340,8 @@ class SecurityTokensService {
 					if (isMatch) {
 						const payload = {
 							id: user.id,
-							name: user.name
+							name: user.name,
+							scopes: 'admin'
 						};
 						jwt.sign(
 							payload,
