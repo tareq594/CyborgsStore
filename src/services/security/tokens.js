@@ -321,7 +321,7 @@ class SecurityTokensService {
 		const { errors, isValid } = validateLoginInput(req.body);
 		if (!isValid) {
 			return res.json({
-				error: errors.email + ' ' + errors.password,
+				error: (errors.email | '') + ' ' + (errors.password | ''),
 				isAuthorized: false
 			});
 		}
