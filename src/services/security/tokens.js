@@ -351,6 +351,16 @@ class SecurityTokensService {
 							(err, token) => {
 								if (err) console.error('There is some error in token', err);
 								else {
+									var stoken = {
+										is_revoked: false,
+										date_created: new Date(),
+										expiration: 10,
+										name: user.name,
+										date_updated: new Date()
+									};
+									db.collection('tokens').replaceOne({ email: email }, stoken, {
+										upsert: true
+									});
 									res.json({
 										success: true,
 										isAuthorized: true,
