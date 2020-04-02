@@ -79,6 +79,7 @@ const checkTokenInBlacklistCallback = async (req, payload, done) => {
 		const { jti } = payload;
 		const blacklist = await SecurityTokensService.getTokensBlacklist();
 		const tokenIsRevoked = blacklist.includes(jti);
+		console.log(tokenIsRevoked);
 		return done(null, tokenIsRevoked);
 	} catch (e) {
 		console.log('check here error');
