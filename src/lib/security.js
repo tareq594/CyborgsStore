@@ -73,6 +73,7 @@ const verifyToken = token =>
 	});
 
 const checkTokenInBlacklistCallback = async (req, payload, done) => {
+	console.log('checktoken');
 	try {
 		const { jti } = payload;
 		const blacklist = await SecurityTokensService.getTokensBlacklist();
@@ -84,16 +85,15 @@ const checkTokenInBlacklistCallback = async (req, payload, done) => {
 };
 
 const applyMiddleware = app => {
-	console.log('here');
-	// if (DEVELOPER_MODE === false) {
-	// 	return;
-	// 	app.use(
-	// 		expressJwt({
-	// 			secret: settings.jwtSecretKey,
-	// 			isRevoked: checkTokenInBlacklistCallback
-	// 		}).unless({ path: PATHS_WITH_OPEN_ACCESS })
-	// 	);
-	// }
+	console.log('apply middle');
+	if (DEVELOPER_MODE === false) {
+		app.use(
+			expressJwt({
+				secret: settings.jwtSecretKey,
+				isRevoked: checkTokenInBlacklistCallback
+			}).unless({ path: PATHS_WITH_OPEN_ACCESS })
+		);
+	}
 };
 
 const getAccessControlAllowOrigin = () =>
