@@ -84,15 +84,16 @@ const checkTokenInBlacklistCallback = async (req, payload, done) => {
 };
 
 const applyMiddleware = app => {
-	if (DEVELOPER_MODE === false) {
-		return;
-		app.use(
-			expressJwt({
-				secret: settings.jwtSecretKey,
-				isRevoked: checkTokenInBlacklistCallback
-			}).unless({ path: PATHS_WITH_OPEN_ACCESS })
-		);
-	}
+	console.log('here');
+	// if (DEVELOPER_MODE === false) {
+	// 	return;
+	// 	app.use(
+	// 		expressJwt({
+	// 			secret: settings.jwtSecretKey,
+	// 			isRevoked: checkTokenInBlacklistCallback
+	// 		}).unless({ path: PATHS_WITH_OPEN_ACCESS })
+	// 	);
+	// }
 };
 
 const getAccessControlAllowOrigin = () =>
